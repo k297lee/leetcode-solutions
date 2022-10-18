@@ -26,18 +26,11 @@ class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
         dsu = DSU(n)
         
+        if len(edges) != n - 1:
+            return False
+        
         for edge in edges:
             if not dsu.union(edge[0], edge[1]):
-                return False
-        
-        seen = set()
-        count = 0
-        for i in range(n):
-            p = dsu.find(i)
-            if p not in seen:
-                count += 1
-                seen.add(p)
-            if count > 1:
                 return False
         
         return True
