@@ -1,9 +1,9 @@
 class Solution:
     def findItinerary(self, tickets: List[List[str]]) -> List[str]:
-        self.res = []
+        res = []
         def backtrack(source, currPath):
             if len(currPath) == len(tickets) + 1:
-                self.res = currPath
+                res.append(currPath)
                 return True
             
             for i, nextDest in enumerate(graph[source]):
@@ -27,4 +27,4 @@ class Solution:
         
         path = ["JFK"]
         backtrack("JFK", path)
-        return self.res
+        return res[0]
