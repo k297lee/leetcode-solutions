@@ -24,5 +24,4 @@ class Solution:
                 dp[i] = dp[i - 2]
             else:
                 dp[i] = dp[i - 1]
-        print(dp)
         return dp[-1]
