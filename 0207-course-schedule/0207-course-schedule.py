@@ -1,34 +1,36 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        courses = defaultdict(list)
+        graph = defaultdict(list)
         
         for prereq in prerequisites:
-            courses[prereq[1]].append(prereq[0])
+            source = prereq[1]
+            dest = prereq[0]
+            graph[source].append(dest)
         
-        seen = set()
-        
-        def cyclic(curr, courses, path):
+        def is_cyclic(curr):
             if curr in seen:
                 return False
+            
             if path[curr]:
                 return True
             
             path[curr] = True
             
             res = False
-            for course in courses[curr]:
-                res = cyclic(course, courses, path)
-                if res:
+            for neighbor in graph[curr]:
+                if is_cyclic(neighbor):
+                    res = True
                     break
             
             path[curr] = False
             seen.add(curr)
             return res
-    
-        path = [False] * numCourses
-    
-        for c in range(numCourses):
-            if c not in seen and cyclic(c, courses, path):
-                return False
         
+        path = [False] * numCourses
+        seen = set()
+        
+        for i in range(numCourses):
+            if i not in seen and is_cyclic(i):
+                return False
+            
         return True
