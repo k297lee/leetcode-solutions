@@ -10,25 +10,29 @@ class Solution:
                 if rooms[i][j] == 0:
                     q.append((i, j))
         
-        currDist = 1
+        # sentinel
         q.append((-1, -1))
-        
+        dist = 1
         while q:
-            c = q.popleft()
-            row = c[0]
-            col = c[1]
+            room = q.popleft()
             
-            if row == -1:
-                currDist += 1
-                if q:
-                    q.append((-1, -1))
+            i = room[0]
+            j = room[1]
             
-            for rowOff, colOff in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
-                newRow = row + rowOff
-                newCol = col + colOff
+            if i == -1 and j == -1:
+                if not q:
+                    continue
+                q.append((-1, -1))
+                dist += 1
+                continue
+            
+            for x, y in [(-1, 0), (0, -1), (1, 0), (0, 1)]:
+                newX = i + x
+                newY = j + y
                 
-                if newRow >= 0 and newRow < len(rooms) and newCol >= 0 and newCol < len(rooms[0]):
-                    if rooms[newRow][newCol] == 2147483647:
-                        rooms[newRow][newCol] = currDist
-                        q.append((newRow, newCol))
-            
+                if newX < 0 or newX >= len(rooms) or newY < 0 or newY >= len(rooms[0]):
+                    continue
+                
+                if rooms[newX][newY] == 2147483647:
+                    rooms[newX][newY] = dist
+                    q.append((newX, newY))
