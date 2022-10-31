@@ -6,13 +6,17 @@ class Solution:
             return 0
         
         dp = [[0] * (2 * total + 1) for _ in range(len(nums))]
-        dp[0][total + nums[0]] = 1
-        dp[0][total - nums[0]] += 1
+        prev = [0] * (2 * total + 1)
+        
+        prev[total + nums[0]] = 1
+        prev[total - nums[0]] += 1
         
         for i in range(1, len(nums)):
+            curr = [0] * (2 * total + 1)
             for j in range(-total, total + 1):
-                if dp[i - 1][j + total]:
-                    dp[i][j + total + nums[i]] += dp[i - 1][j + total]
-                    dp[i][j + total - nums[i]] += dp[i - 1][j + total]
+                if prev[j + total]:
+                    curr[j + total + nums[i]] += prev[j + total]
+                    curr[j + total - nums[i]] += prev[j + total]
+            prev = curr
         
-        return dp[-1][total + target]
+        return prev[total + target]
