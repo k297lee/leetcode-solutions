@@ -3,11 +3,9 @@ class Solution:
         dp = [False] * len(nums)
         
         dp[-1] = True
-        
+        lastPos = len(nums) - 1
         for i in range(len(nums) - 1, -1, -1):
-            if i + nums[i] >= len(nums):
+            if i + nums[i] >= lastPos:
                 dp[i] = True
-            else:
-                for j in range(i, i + nums[i] + 1):
-                    dp[i] = dp[i] or dp[j]
+                lastPos = i
         return dp[0]
