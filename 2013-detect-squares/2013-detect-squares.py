@@ -9,18 +9,6 @@ class DetectSquares:
         self.freqs[(point[0], point[1])] += 1
 
     def count(self, point: List[int]) -> int:
-        '''
-        for p in self.freq.keys():
-            if p[1] != point[1]:
-                continue
-            
-            xs = []
-            for k in self.freq.keys():
-                if k == p or k == point[1]:
-                    continue
-                
-                if k[0] == p[1]
-        '''
         if point[1] not in self.y_map:
             return 0
         
