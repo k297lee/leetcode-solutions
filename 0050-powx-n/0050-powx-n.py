@@ -1,24 +1,25 @@
 class Solution:
     def myPow(self, x: float, n: int) -> float:
-        isNeg = False
         if n < 0:
-            isNeg = True
+            x = 1 / x
+            n = abs(n)
         
-        n = abs(n)
+        negResult = False
+        if x < 0 and n % 2 == 1:
+            negResult = True
         
-        resNeg = -1 if x < 0 and n % 2 == 1 else 1
+        if n == 1:
+            return x
+        
         x = abs(x)
         res = 1
-        
-        for i in range(n):
-            if isNeg:
-                res *= 1 / x
-            else:
+        while n > 0:
+            if n % 2 == 1:
                 res *= x
-            
-            if res == 0:
-                break
-            elif res == 1:
-                break
+            x *= x
+            n = n // 2
         
-        return res * resNeg
+        if negResult:
+            res = -res
+        
+        return res
