@@ -10,4 +10,4 @@ class Solution:
             for i in range(shell, n - shell - 1):
                 matrix[n - 1 - i][shell], matrix[i][n - shell - 1], matrix[n - shell - 1][n - 1 - i], matrix[shell][i] = \
                 matrix[n - shell - 1][n - 1 - i], matrix[shell][i], matrix[i][n - shell - 1], matrix[n - 1 - i][shell]
-                #print(matrix)
+                
