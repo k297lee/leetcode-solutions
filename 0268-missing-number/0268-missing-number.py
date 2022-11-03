@@ -1,10 +1,7 @@
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
-        for i in range(len(nums) + 1):
-            nums.append(i)
-        
-        res = 0
-        for num in nums:
-            res ^= num
+        res = len(nums)
+        for i, num in enumerate(nums):
+            res ^= i ^ num
         
         return res
