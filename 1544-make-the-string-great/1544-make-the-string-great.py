@@ -3,29 +3,15 @@ class Solution:
         if len(s) < 2:
             return s
         
-        prev = s
-        while True:
-            length = len(prev)
-            
-            curr = []
-            i = 0
-            while i < len(prev) - 1:
-                if prev[i] != prev[i + 1] and prev[i].upper() == prev[i + 1]:
-                    i += 2
-                    continue
-                elif prev[i] != prev[i + 1] and prev[i].lower() == prev[i + 1]:
-                    i += 2
-                    continue
-                
-                curr.append(prev[i])
-                i += 1
-            
-            if i != len(prev):
-                curr.append(prev[-1])
-            
-            if len(curr) == len(prev):
-                return "".join(curr)
-            
-            prev = "".join(curr)
+        stack = []
         
-        return ""
+        stack.append(s[0])
+        for i in range(1, len(s)):
+            if stack and stack[-1] != s[i] and stack[-1].upper() == s[i]:
+                stack.pop()
+            elif stack and stack[-1] != s[i] and stack[-1].lower() == s[i]:
+                stack.pop()
+            else:
+                stack.append(s[i])
+        
+        return "".join(stack)
