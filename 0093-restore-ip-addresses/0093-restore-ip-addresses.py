@@ -18,11 +18,12 @@ class Solution:
                     break
                 
                 if dots == 3 and len(curr) + len(intStr) - dots == len(s):
-                    res.append(curr + intStr)
+                    ip = "".join(curr + list(intStr))
+                    res.append(ip)
                     return
                 
-                backtrack(i + 1, curr + intStr + ".", dots + 1)
+                backtrack(i + 1, curr + list(intStr) + ["."], dots + 1)
             
 
-        backtrack(0, "", 0)
+        backtrack(0, [], 0)
         return res
