@@ -7,8 +7,6 @@ class Solution:
             for j in range(i, len(s)):
                 if i == j:
                     curr[j] = 1
-                elif i == j + 1 and s[i] == s[j]:
-                    curr[j] = 2
                 elif s[i] == s[j]:
                     curr[j] = prev[j - 1] + 2
                 else:
