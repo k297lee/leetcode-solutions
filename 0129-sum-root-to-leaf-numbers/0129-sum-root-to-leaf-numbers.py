@@ -8,15 +8,15 @@ class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
         def dfs(root, curr):
             if not root.left and not root.right:
-                return int("".join([str(x) for x in curr + [root.val]]))
+                return curr * 10 + root.val
             
             total = 0
             if root.left:
-                total += dfs(root.left, curr + [root.val])
+                total += dfs(root.left, curr * 10 + root.val)
             
             if root.right:
-                total += dfs(root.right, curr + [root.val])
+                total += dfs(root.right, curr * 10 + root.val)
             
             return total
         
-        return dfs(root, [])
+        return dfs(root, 0)
